@@ -2,11 +2,14 @@
 FROM ubuntu:22.04
 
 # Install prerequisites:
-# - fortune-mod & cowsay : required by the app
-# - netcat-openbsd       : the script uses `nc -lN` (OpenBSD netcat syntax)
+# - fortune-mod : the fortune binary
+# - fortunes    : the quote database (required, or you get "No fortunes found")
+# - cowsay      : required by the app
+# - netcat-openbsd : the script uses `nc -lN` (OpenBSD netcat syntax)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         fortune-mod \
+        fortunes \
         cowsay \
         netcat-openbsd && \
     rm -rf /var/lib/apt/lists/*

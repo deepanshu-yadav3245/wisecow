@@ -5,11 +5,11 @@ metadata:
   labels:
     app: wisecow
 spec:
-  type: NodePort
+  type: ClusterIP          # Ingress will expose it externally
   selector:
     app: wisecow
   ports:
     - name: http
-      port: 80          # Service port (used by the Ingress)
-      targetPort: 4499  # Container port
-      nodePort: 30499   # Direct access for quick testing: http://<node-ip>:30499
+      port: 80             # Service port
+      targetPort: 4499     # Container port
+      protocol: TCP

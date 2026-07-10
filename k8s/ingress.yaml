@@ -1,18 +1,16 @@
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wisecow-ingress
-  labels:
-    app: wisecow
   annotations:
-    # Redirect all HTTP traffic to HTTPS (secure TLS communication)
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - wisecow.local
-      secretName: wisecow-tls   # Created from the self-signed cert (see tls/generate-tls.sh)
+      secretName: wisecow-tls
   rules:
     - host: wisecow.local
       http:
@@ -24,3 +22,6 @@ spec:
                 name: wisecow-service
                 port:
                   number: 80
+EOF
+
+kubectl apply -f k8s/ingress.yaml
